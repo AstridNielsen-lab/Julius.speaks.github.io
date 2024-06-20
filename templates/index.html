@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenAI Assistant</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@openai/openai-js@1.0.1/dist/openai-js.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <style>
+        .chat-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 50px;
+        }
+        .message {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .user-message {
+            background-color: #e0f7fa;
+            text-align: right;
+        }
+        .assistant-message {
+            background-color: #bbdefb;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="chat-container">
+            <div id="chat-history">
+                {% for message in responses %}
+                    <div class="message {{ message.role }}-message">
+                        <p>{{ message.text }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <form id="question-form" onsubmit="return sendMessage()">
+                <div class="form-group">
+                    <label for="user-input"><strong>Você:</strong></label>
+                    <input type="text" class="form-control" id="user-input" placeholder="Digite sua pergunta...">
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

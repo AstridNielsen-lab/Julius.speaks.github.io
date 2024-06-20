@@ -1,0 +1,71 @@
+/* Reset básico para remover margens e paddings padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo para o corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+/* Estilo para o contêiner principal do chat */
+#chat-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para o histórico de mensagens */
+#chat-history {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Estilo para as mensagens do usuário */
+#chat-history p:nth-child(odd) {
+    margin: 5px 0;
+    padding-left: 10px;
+}
+
+/* Estilo para as mensagens do bot */
+#chat-history p:nth-child(even) {
+    margin: 5px 0;
+    text-align: right;
+    padding-right: 10px;
+}
+
+/* Estilo para o campo de entrada do usuário */
+#user-input {
+    width: calc(100% - 80px);
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+/* Estilo para o botão de enviar */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+/* Estilizando o botão ao passar o mouse */
+button:hover {
+    background-color: #0056b3;
+}
