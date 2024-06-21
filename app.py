@@ -1,8 +1,9 @@
 import asyncio
-from flask import Flask, render_template, request, jsonify, Response, stream_with_context
+from flask import Flask, render_template, request, jsonify
 import openai
 import azure.cognitiveservices.speech as speechsdk
 import base64
+import io
 
 app = Flask(__name__)
 
@@ -18,7 +19,7 @@ responses = []
 
 # Inicialização do serviço de fala da Azure
 speech_config = speechsdk.SpeechConfig(subscription=azure_api_key, region=azure_region)
-speech_config.speech_synthesis_voice_name = 'sr-RS-NicholasNeural'  # Exemplo de voz para o idioma sérvio
+speech_config.speech_synthesis_voice_name = 'pt-BR-AntonioNeural'  # Voz em português do Brasil
 
 # Função para enviar a pergunta ao assistente da OpenAI
 @app.route('/send_question', methods=['POST'])
@@ -26,22 +27,25 @@ def send_question():
     try:
         user_question = request.json['question']
 
-        @stream_with_context
-        def generate():
+        def generate_response():
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages=[
                     {"role": "system", "content": "Você é um assistente útil."},
                     {"role": "user", "content": user_question}
                 ],
-                stream=True
+                stream=False  # Desativar o streaming para capturar a resposta completa
             )
-            for chunk in response:
-                if 'choices' in chunk:
-                    text_chunk = chunk['choices'][0]['delta'].get('content', '')
-                    yield text_chunk
+            complete_text = response['choices'][0]['message']['content']
+            return complete_text
 
-        return Response(generate(), content_type='text/plain')
+        complete_text = generate_response()
+        audio_base64 = text_to_speech(complete_text)
+
+        return jsonify({
+            'text': complete_text,
+            'audio_base64': audio_base64
+        })
 
     except Exception as e:
         print(f"Erro ao enviar pergunta para o assistente da OpenAI: {e}")
@@ -50,13 +54,16 @@ def send_question():
 # Função para converter texto em áudio usando Azure Speech
 def text_to_speech(text):
     try:
-        audio_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=True)
+        audio_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=True)  # Ativa o alto-falante padrão
         synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
 
         result = synthesizer.speak_text_async(text).get()
         if result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
-            audio_stream = result.audio_data
-            audio_base64 = base64.b64encode(audio_stream).decode('utf-8')
+            audio_stream = io.BytesIO()
+            audio_data_stream = speechsdk.AudioDataStream(result)
+            audio_data_stream.save_to_wave_file(audio_stream)
+            audio_stream.seek(0)
+            audio_base64 = base64.b64encode(audio_stream.read()).decode('utf-8')
             return audio_base64
         else:
             print(f"Erro ao sintetizar áudio: {result.reason}")
@@ -64,21 +71,6 @@ def text_to_speech(text):
     except Exception as e:
         print(f"Erro ao converter texto em áudio com Azure Speech: {e}")
         return None
-
-# Rota para converter texto em áudio
-@app.route('/text_to_speech', methods=['POST'])
-def convert_text_to_speech():
-    try:
-        data = request.json
-        text = data['text']
-        audio_base64 = text_to_speech(text)
-        if audio_base64:
-            return jsonify({'audio_base64': audio_base64}), 200
-        else:
-            return jsonify({'error': 'Erro ao converter texto em áudio'}), 500
-    except Exception as e:
-        print(f"Erro na conversão de texto para áudio: {e}")
-        return jsonify({'error': 'Erro na conversão de texto para áudio'}), 500
 
 # Rota para página inicial
 @app.route('/')

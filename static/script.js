@@ -14,39 +14,33 @@ function sendMessage() {
         },
         body: JSON.stringify({ question: userInput })
     })
-    .then(response => {
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let assistantMessage = '<div class="message assistant-message"><p><strong>Assistente:</strong> ';
+    .then(response => response.json())
+    .then(data => {
+        const assistantMessage = '<div class="message assistant-message"><p><strong>Assistente:</strong> ' + data.text + '</p></div>';
         chatHistory.innerHTML += assistantMessage;
 
-        function readStream() {
-            reader.read().then(({ done, value }) => {
-                if (done) {
-                    chatHistory.innerHTML += '</p></div>';
-                    // Limpa o campo de entrada do usuário
-                    document.getElementById('user-input').value = '';
-                    // Rolagem automática para exibir a mensagem mais recente
-                    chatHistory.scrollTop = chatHistory.scrollHeight;
-                    return;
-                }
-                const textChunk = decoder.decode(value, { stream: true });
-                const formattedText = textChunk.replace(/<[^>]+>/g, '');  // Remove tags HTML
-                chatHistory.lastChild.lastChild.innerHTML += formattedText;  // Adiciona o texto formatado ao histórico
-                readStream();
-            }).catch(error => {
-                console.error('Erro ao ler o stream:', error);
-            });
+        if (data.audio_base64) {
+            playAudio(data.audio_base64);
+        } else {
+            console.error('Erro ao converter texto em áudio');
         }
-
-        readStream();
     })
     .catch(error => {
         console.error('Erro ao enviar pergunta:', error);
     });
 
+    // Limpa o campo de entrada do usuário
+    document.getElementById('user-input').value = '';
+
     // Impede o envio do formulário
     return false;
+}
+
+// Função para reproduzir áudio a partir de base64
+function playAudio(audioBase64) {
+    var audio = new Audio();
+    audio.src = 'data:audio/wav;base64,' + audioBase64;
+    audio.play();
 }
 
 // Função para enviar mensagem ao pressionar Enter
@@ -56,32 +50,3 @@ document.getElementById('user-input').addEventListener('keypress', function (e) 
         sendMessage();
     }
 });
-
-// Função para converter texto em áudio usando o Azure Speech
-function textToSpeech(text) {
-    fetch('/text_to_speech', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ text: text })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.audio_base64) {
-            playAudio(data.audio_base64);
-        } else {
-            console.error('Erro ao converter texto em áudio');
-        }
-    })
-    .catch(error => {
-        console.error('Erro na requisição para conversão de texto em áudio:', error);
-    });
-}
-
-// Função para reproduzir áudio a partir de base64
-function playAudio(audioBase64) {
-    var audio = new Audio();
-    audio.src = 'data:audio/wav;base64,' + audioBase64;
-    audio.play();
-}
