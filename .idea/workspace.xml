@@ -4,15 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57fca034-ec15-451c-acdf-08bc8702d298" name="Changes" comment="" />
+    <list default="true" id="57fca034-ec15-451c-acdf-08bc8702d298" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/chave projeto equipe.txt" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2i7XwAQFEr7hwNwcqnDaJrExNDW" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -22,6 +27,7 @@
   "keyToString": {
     "Python.roboservio.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "index.html",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -73,6 +79,7 @@
       <option name="presentableId" value="Default" />
       <updated>1718842843021</updated>
       <workItem from="1718842849221" duration="529000" />
+      <workItem from="1718945355900" duration="72000" />
     </task>
     <servers />
   </component>
