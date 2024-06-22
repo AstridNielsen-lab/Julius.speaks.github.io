@@ -8,10 +8,10 @@ import io
 app = Flask(__name__)
 
 # Configurações da OpenAI
-openai.api_key = "SUA CHAVE DE API"
+openai.api_key = "sk-proj-YL6DGd50XwDxbv0C9CByT3BlbkFJrJG5mz2ZkD8PHbZyXJ9x"
 
 # Configurações do Azure Speech
-azure_api_key = "SUA CHAVE DE API"
+azure_api_key = "d00ed40fcc144be0a167721cf5867bee"
 azure_region = "westeurope"
 
 # Lista para armazenar respostas
