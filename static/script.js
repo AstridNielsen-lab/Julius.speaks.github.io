@@ -1,5 +1,61 @@
-function sendMessage() {
-    var userInput = document.getElementById('user-input').value;
+// Variáveis globais para armazenar objetos do reconhecimento de voz e controle de estado
+var recognition;
+var isListening = false;
+var isSpeaking = false;
+
+// Função para iniciar o reconhecimento de voz
+function startSpeechRecognition() {
+    recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = getSpeechRecognitionLanguage(); // Define o idioma para o idioma do navegador ou padrão
+    recognition.interimResults = false; // Não queremos resultados intermediários
+    recognition.maxAlternatives = 1; // Apenas uma alternativa
+
+    recognition.onstart = function() {
+        console.log('Reconhecimento de voz iniciado. Você pode falar agora.');
+        isListening = true;
+    };
+
+    recognition.onresult = function(event) {
+        var transcript = event.results[0][0].transcript;
+        console.log('Você disse: ', transcript);
+        sendMessage(transcript); // Envia a mensagem transcrita
+    };
+
+    recognition.onspeechend = function() {
+        console.log('Fim do discurso.');
+        isListening = false;
+        if (!isSpeaking) {
+            // Reinicia o reconhecimento de voz após um curto intervalo de silêncio
+            setTimeout(function() {
+                if (isListening) {
+                    recognition.start();
+                }
+            }, 1000); // Reinicia após 1 segundo (ajuste conforme necessário)
+        }
+    };
+
+    recognition.onerror = function(event) {
+        console.error('Erro no reconhecimento de voz: ', event.error);
+        isListening = false;
+        recognition.stop();
+    };
+
+    recognition.start();
+}
+
+// Função para obter o idioma do navegador ou padrão
+function getSpeechRecognitionLanguage() {
+    var navigatorLang = navigator.language || 'hr-HR'; // Idioma do navegador ou padrão para croata
+    // Ajuste para suportar múltiplos idiomas
+    if (navigatorLang.startsWith('pt') || navigatorLang.startsWith('en') || navigatorLang.startsWith('hr')) {
+        return navigatorLang; // Retorna o idioma do navegador se for pt-BR, en-US ou hr-HR
+    } else {
+        return 'pt-BR'; // Padrão para português do Brasil
+    }
+}
+
+// Função para enviar mensagem
+function sendMessage(userInput) {
     var chatHistory = document.getElementById('chat-history');
 
     // Exibe a pergunta do usuário no histórico
@@ -19,10 +75,12 @@ function sendMessage() {
         const assistantMessage = '<div class="message assistant-message"><p><strong>Assistente:</strong> ' + data.text + '</p></div>';
         chatHistory.innerHTML += assistantMessage;
 
-        if (data.audio_base64) {
-            playAudio(data.audio_base64);
+        // Utiliza Web Speech API para sintetizar o texto em áudio
+        if (data.text) {
+            isSpeaking = true;
+            playTextAsSpeech(data.text);
         } else {
-            console.error('Erro ao converter texto em áudio');
+            console.error('Erro ao obter a resposta do assistente');
         }
     })
     .catch(error => {
@@ -36,17 +94,26 @@ function sendMessage() {
     return false;
 }
 
-// Função para reproduzir áudio a partir de base64
-function playAudio(audioBase64) {
-    var audio = new Audio();
-    audio.src = 'data:audio/wav;base64,' + audioBase64;
-    audio.play();
+// Função para reproduzir texto como áudio usando Web Speech API com sotaque francês
+function playTextAsSpeech(text) {
+    if ('speechSynthesis' in window) {
+        var speech = new SpeechSynthesisUtterance(text);
+        speech.lang = 'fr-FR'; // Define o idioma para francês (França) para obter o sotaque francês
+
+        speech.onend = function(event) {
+            isSpeaking = false;
+            // Reativa o reconhecimento de voz após o assistente terminar de falar
+            if (isListening) {
+                recognition.start();
+            }
+        };
+        window.speechSynthesis.speak(speech);
+    } else {
+        console.error('Web Speech API não é suportado neste navegador.');
+    }
 }
 
-// Função para enviar mensagem ao pressionar Enter
-document.getElementById('user-input').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        e.preventDefault(); // Impede a ação padrão de enviar o formulário
-        sendMessage();
-    }
-});
+// Inicia o reconhecimento de voz quando a página é carregada
+window.onload = function() {
+    startSpeechRecognition();
+};

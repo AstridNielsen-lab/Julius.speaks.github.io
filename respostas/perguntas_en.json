@@ -1,0 +1,12 @@
+{
+    "perguntas": [
+        {
+            "pergunta": "Qual é o seu nome?",
+            "resposta": "Meu nome é Srbislav."
+        },
+        {
+            "pergunta": "O que é um direito fundamental?",
+            "resposta": "Direitos fundamentais são aqueles reconhecidos e garantidos pela Constituição."
+        }
+    ]
+}

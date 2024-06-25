@@ -48,8 +48,19 @@
                     <input type="text" class="form-control" id="user-input" placeholder="Digite sua pergunta...">
                 </div>
                 <button type="submit" class="btn btn-primary">Enviar</button>
+                
+                <button type="button" class="btn btn-warning" id="restart-button">Reiniciar Interação</button> <!-- Botão adicionado -->
             </form>
         </div>
     </div>
+
+    <script>
+        // Função para reiniciar a interação
+        document.getElementById('restart-button').addEventListener('click', function() {
+            if (recognition && !isListening) { // Verifica se o reconhecimento já está em andamento
+                recognition.start();
+            }
+        });
+    </script>
 </body>
 </html>
