@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Ignore Flax project files
 Binaries/
 Cache/
@@ -43,3 +44,11 @@ _ReSharper*/
 
 # Ignore Nuget packages folder
 packages/
+=======
+# dependencies
+node_modules/
+.vscode/
+.idea/
+.wix/
+jsconfig.json
+>>>>>>> 06c5747343517accb899015bcb48d55f4f6b8875
