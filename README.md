@@ -4,7 +4,7 @@
 </div>
 <div style="text-align: center;">
 <a href="https://likelook.wixsite.com/solutions">
-        <img src="https://raw.githubusercontent.com/AstridNielsen-lab/Julius.speaks.github.io/main/capa%20app.jpg" alt="Easy Cloud DGold Systems DOO Beočin - DGoldMeta NFT VR" style="width: 90%; max-width: 600px;"/> </a>
+        <img src="https://raw.githubusercontent.com/AstridNielsen-lab/Julius.speaks.github.io/main/capa%20app.jpg" alt="Easy Cloud DGold Systems DOO Beočin - DGoldMeta NFT VR" style="width: 90%; max-width: 500px;"/> </a>
 
 </div>
 
