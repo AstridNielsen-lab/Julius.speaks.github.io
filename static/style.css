@@ -8,7 +8,7 @@
 /* Estilo para o corpo da página */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #000000; /* Altere para preto */
     padding: 20px;
 }
 
@@ -16,7 +16,7 @@ body {
 #chat-container {
     max-width: 600px;
     margin: 0 auto;
-    background-color: #fff;
+    background-color: #ffffff; /* Mantenha a cor desejada para o contêiner */
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 20px;
@@ -60,7 +60,7 @@ button {
     font-size: 16px;
     border: none;
     background-color: #007bff;
-    color: #fff;
+    color: #ffffff;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
 }

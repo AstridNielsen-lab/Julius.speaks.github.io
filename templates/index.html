@@ -9,13 +9,20 @@
     <script src="https://cdn.jsdelivr.net/npm/@openai/openai-js@1.0.1/dist/openai-js.min.js"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
     <style>
+        body {
+            background-color: #000000; /* Altere para preto */
+            color: #ffffff; /* Ajustar a cor do texto para garantir a legibilidade */
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
         .chat-container {
             max-width: 600px;
             margin: auto;
             padding: 20px;
-            border: 1px solid #ccc;
+            border: 1px solid #000000;
             border-radius: 5px;
             margin-top: 50px;
+            background-color: #1d1b1b; /* Se desejar manter o fundo do contêiner branco */
         }
         .message {
             margin: 10px;
@@ -23,18 +30,73 @@
             border-radius: 5px;
         }
         .user-message {
-            background-color: #e0f7fa;
+            background-color: #158a99;
             text-align: right;
         }
         .assistant-message {
-            background-color: #bbdefb;
+            background-color: #2f9fb3;
             text-align: left;
+        }
+        .button-container {
+            margin: 40px 0;
+        }
+        .button-container button, .footer-links a {
+            background-color: #05c1fa; /* Cor do botão */
+            border: none;
+            color: white;
+            padding: 10px 20px; /* Aumentar o padding para melhor aparência */
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px; /* Bordas arredondadas */
+            transition: background-color 0.3s ease; /* Suaviza a transição de cor */
+        }
+        .button-container button:hover, .footer-links a:hover {
+            background-color: #b4b22c; /* Cor ao passar o mouse */
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* Espaçamento entre os links */
+            margin: 30px 0;
+        }
+        .footer-links a {
+            color: rgb(0, 0, 0); /* Cor dos links */
+            text-decoration: none; /* Remove o sublinhado dos links */
+            font-size: 15px;
+        }
+        .footer-links a:hover {
+            text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+        }
+        .logo {
+            width: 100px; /* Ajuste o tamanho conforme necessário */
+            height: auto;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .title {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 24px;
+            margin-left: 20px;
+        }
+        .header-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="chat-container">
+            <div class="header-container">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+                <span class="title">Assistente de vendas Like Look Solutions</span>
+            </div>
             <div id="chat-history">
                 {% for message in responses %}
                     <div class="message {{ message.role }}-message">
@@ -42,14 +104,17 @@
                     </div>
                 {% endfor %}
             </div>
+            <center>
             <form id="question-form" onsubmit="return sendMessage()">
                 <div class="form-group">
-                    <label for="user-input"><strong>Você:</strong></label>
-                    <input type="text" class="form-control" id="user-input" placeholder="Digite sua pergunta...">
+                    <button type="button" class="btn btn-warning" id="restart-button">conversar</button> <!-- Botão adicionado -->
+                </br>
+                <div class="footer-links">
+                    <a href="https://api.whatsapp.com/send?phone=381607666396&text=Hello%20I%20want%20to%20know%20about%20the%20robot%20?" target="_blank">Pedidos</a>
+                    <a href="https://api.whatsapp.com/send?phone=5511992946628&text=Oi%20Julio%20Tudo%20bem%20?" target="_blank">Contato</a>
                 </div>
-                <button type="submit" class="btn btn-primary">Enviar</button>
-                
-                <button type="button" class="btn btn-warning" id="restart-button">Reiniciar Interação</button> <!-- Botão adicionado -->
+                </center>
+                </div>
             </form>
         </div>
     </div>
