@@ -98,7 +98,8 @@ Se você deseja contribuir para o SRBISLAV, siga estas etapas:
 
 ## Licença
 
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+Este projeto está licenciado sob a Licença MIT 
+Veja o arquivo [LICENSE](LICENSE) para detalhes.
 
 ## Contato
 
