@@ -1,4 +1,3 @@
-![](https://github.com/Platane/snk/raw/output/github-contribution-grid-snake.svg)
 <div style="text-align: center;">
 <a href="https://likelook.wixsite.com/solutions">
         <img src="https://raw.githubusercontent.com/AstridNielsen-lab/Julius.speaks.github.io/main/capa%20app.jpg" alt="Easy Cloud DGold Systems DOO Beočin - DGoldMeta NFT VR"/> </a>
@@ -114,3 +113,4 @@ Para dúvidas ou mais informações, entre em contato:
     <a href="https://likelook.wixsite.com/solutions">
         <img src="https://github.com/AstridNielsen-lab/SRBISLAV.github.io/blob/index.html/Like%20Look%20Solutions%20(1).gif?raw=true" alt="Easy Cloud DGold Systems DOO Beočin - DGoldMeta NFT VR" style="width: 100%; max-width: 600px;"/> </a>    
 </div>
+![](https://github.com/Platane/snk/raw/output/github-contribution-grid-snake.svg)
