@@ -1,0 +1,40 @@
+name: Deploy Flask App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          # Adicione comandos de teste se houver
+          echo "No tests to run"
+
+      - name: Build and prepare
+        run: |
+          # Adicione comandos de preparação se necessário
+          echo "Prepare for deployment"
+
+      - name: Deploy to Server
+        run: |
+          # Comandos de implantação específicos para seu ambiente
+          echo "Deployment step - adjust according to your needs"
+          # Por exemplo: scp -r * user@server:/path/to/deployment
