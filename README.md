@@ -107,7 +107,7 @@ Para dúvidas ou mais informações, entre em contato:
 - **Nome:** Julio Campos Machado
 - **Email:** juliocamposmachado@gmail.com
 - **GitHub:** [AstridNielsen-lab](https://github.com/AstridNielsen-lab)
-- **GitHubPages:** [AstridNielsen-lab](https://astridnielsen-lab.github.io/Julius.speaks.github.io)
+- **GitHubPages:** [Julius.speaks](https://astridnielsen-lab.github.io/Julius.speaks.github.io)
 
 
   <div style="text-align: center;">
