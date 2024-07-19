@@ -2,6 +2,7 @@
 <a href="https://likelook.wixsite.com/solutions">
         <img src="https://raw.githubusercontent.com/AstridNielsen-lab/Julius.speaks.github.io/main/capa%20app.jpg" alt="Easy Cloud DGold Systems DOO Beočin - DGoldMeta NFT VR"/> </a>
 </div>
+
 # SRBISLAV
 
 **SRBISLAV** é um projeto que visa criar e gerenciar robôs automatizados para diversas aplicações. O projeto utiliza Python para programação e Flask para a interface web.
