@@ -1,10 +1,3 @@
- <h1>Exibir Vídeo com Player Nativo do Navegador</h1>
-    <video width="640" controls>
-        <source src="https://raw.githubusercontent.com/AstridNielsen-lab/Julius.speaks.github.io/main/app.mp4" type="video/mp4">
-        Seu navegador não suporta o elemento de vídeo.
-    </video>
-
-
 <div style="text-align: center;">
 <a href="https://likelook.wixsite.com/solutions">
         <img src="https://raw.githubusercontent.com/AstridNielsen-lab/Julius.speaks.github.io/main/capa%20app.jpg" alt="Easy Cloud DGold Systems DOO Beočin - DGoldMeta NFT VR"/> </a>
