@@ -1,3 +1,14 @@
+
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+  <a href="https://www.youtube.com/watch?v=example" target="_blank">
+    <image href="https://via.placeholder.com/600x400.png" width="600" height="400"/>
+    <text x="50%" y="50%" text-anchor="middle" font-size="40" fill="white" dy=".3em">▶</text>
+  </a>
+</svg>
+
+
+
+
 <div style="text-align: center;">
 <a href="https://likelook.wixsite.com/solutions">
         <img src="https://raw.githubusercontent.com/AstridNielsen-lab/Julius.speaks.github.io/main/capa%20app.jpg" alt="Easy Cloud DGold Systems DOO Beočin - DGoldMeta NFT VR"/> </a>
