@@ -95,26 +95,6 @@ Se você deseja contribuir para o SRBISLAV, siga estas etapas:
 
 5. **Crie um Pull Request.**
 
-6. **vercel.json**
-
-```javascript
-{
-    "version": 2,
-    "builds": [
-      {
-        "src": "src/index.py",
-        "use": "@vercel/python"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "src/app.py"
-      }
-    ]
-  } 
-
-```
 
 ## Licença
 
